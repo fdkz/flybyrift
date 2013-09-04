@@ -1,7 +1,4 @@
-#import pyglet
-
-from modules.pyrexopengl import *
-from modules.pyrexopenglconstans import *
+from OpenGL.GL import *
 
 import vector
 import coordinate_system

@@ -1,6 +1,7 @@
 import logging
 log = logging.getLogger(__name__)
 
+import sys
 
 # install a logging filter that removes some of these messages when using logging and "from OpenGL import GL":
 #     OpenGL.acceleratesupport No OpenGL_accelerate module loaded: No module named OpenGL_accelerate
@@ -10,10 +11,17 @@ log = logging.getLogger(__name__)
 class PyOpenGLLogNoiseFilter(logging.Filter):
     def filter(self, record):
         try:
-            if record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "numeric":
-                #record.msg = record.msg[:-4]
-                #record.args = record.args[:-1]
-                return 0 # log the message. 0 for no, nonzero for yes.
+            if sys.platform == "win32":
+                if record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "numeric" or \
+                        record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "vbo" or \
+                        record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "vbooffset" or \
+                        record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "numpy":
+                    #record.msg = record.msg[:-4]
+                    #record.args = record.args[:-1]
+                    return 0 # log the message. 0 for no, nonzero for yes.
+            else:
+                if record.msg == "Unable to load registered array format handler %s:\n%s" and record.args[0] == "numeric":
+                    return 0
             return 1
         except:
             log.exception("")

@@ -60,7 +60,7 @@ def read_conf(conf_base_filename="conf_base.py"):
             d = {}
         return d
 
-    log.info("importing root conf file: '%s'", conf_base_filename)
+    log.info("importing root conf file: '%s'", os.path.normpath(conf_base_filename))
     # TODO: does this method of importing work with app2exe and similar systems?
     sys.path.append(os.path.dirname(conf_base_filename))
     conf_importname = os.path.basename(conf_base_filename)[:-3]

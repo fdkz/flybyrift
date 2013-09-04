@@ -6,14 +6,12 @@ import random
 
 #from modules.pyrexopengl import *
 #from modules.pyrexopenglconstans import *
-from modules.pyrexopengl import glMultMatrixf as glMultMatrixf2
 
 import vector
 import axial_frame
 import coordinate_system
 
 from OpenGL.GL import *
-#from ctypes import c_float
 
 
 import cube
@@ -343,7 +341,7 @@ class Gimbal1:
         glColor4f(0., 0., 0., 0.) # works in case of glDisable(GL_LIGHTING)
 
         glPushMatrix()
-        glMultMatrixf2(self.ocs.get_opengl_matrix2())
+        glMultMatrixf(self.ocs.get_opengl_matrix2())
         #GL.glMaterialfv(GL.GL_FRONT, GL.GL_DIFFUSE,   vec(.9,  .9,  .9,  1.))
 
         self.cubes_vbo_body.render()
@@ -387,7 +385,7 @@ class Gimbal1:
 
         if 1:
             glPushMatrix()
-            glMultMatrixf2(self.ocs_yaw.get_opengl_matrix2())
+            glMultMatrixf(self.ocs_yaw.get_opengl_matrix2())
             glMaterialfv(GL_FRONT, GL_DIFFUSE,   vec(r,  g,  b,  1.))
             #for v in self.vertex_lists_yaw: v.draw(pyglet.gl.GL_QUADS)
             self.cubes_vbo_yaw.render()
@@ -395,14 +393,14 @@ class Gimbal1:
 
             if 1:
                 glPushMatrix()
-                glMultMatrixf2(self.ocs_roll.get_opengl_matrix2())
+                glMultMatrixf(self.ocs_roll.get_opengl_matrix2())
                 #for v in self.vertex_lists_roll: v.draw(pyglet.gl.GL_QUADS)
                 self.cubes_vbo_roll.render()
                 #self._draw_axis(2.)
 
                 if 1:
                     glPushMatrix()
-                    glMultMatrixf2(self.ocs_pitch.get_opengl_matrix2())
+                    glMultMatrixf(self.ocs_pitch.get_opengl_matrix2())
                     #for v in self.vertex_lists_pitch: v.draw(pyglet.gl.GL_QUADS)
                     self.cubes_vbo_pitch.render()
                     self._draw_axis_engineers(1.)

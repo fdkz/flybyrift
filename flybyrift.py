@@ -14,12 +14,18 @@ if sys.hexversion < 0x2060000:
 # if under py2exe, sys.path[0] is sometimes really wrong. here's a foolproof way to get the exe dir.
 # http://www.py2exe.org/index.cgi/WhereAmI
 if hasattr(sys, "frozen"):
-    g_py_path = os.path.dirname(unicode(sys.executable, sys.getfilesystemencoding()))
+    # this only works with pyinstaller.
+    g_py_path = sys._MEIPASS
+#    g_py_path = os.path.dirname(unicode(sys.executable, sys.getfilesystemencoding()))
     # if frozen, enable source/hybrid distribution.. (meaning we can use python source files with the
     # standalone exe without having to have python installed)
-    sys.path.insert(0, os.path.normpath(g_py_path))
+#    sys.path.insert(0, os.path.normpath(g_py_path))
 else:
     g_py_path = sys.path[0] # can't use os.path.dirname. last dir is without the slash :S
+
+
+#os.environ["PYSDL2_DLL_PATH"] = os.path.join(os.getcwd(), 'py')
+os.environ["PYSDL2_DLL_PATH"] = g_py_path
 
 
 import logging

@@ -6,7 +6,7 @@ import time
 
 t = time.time()
 import OpenGL
-from OpenGL import GL
+from OpenGL.GL import *
 logg.info("import duration: %.2f seconds (PyOpenGL)", time.time() - t)
 #OpenGL.FULL_LOGGING = True
 logg.info("PyOpenGL version %s", OpenGL.__version__)
@@ -20,9 +20,9 @@ import ctypes
 logg.info("import duration: %.2f seconds (ctypes)", time.time() - t)
 
 t = time.time()
-from modules.pyrexopengl import *
-from modules.pyrexopenglconstans import *
-logg.info("import duration: %.2f seconds (pyrexopengl)", time.time() - t)
+#from modules.copenglconstants import *
+#from modules.copengl import *
+#logg.info("import duration: %.2f seconds (copengl)", time.time() - t)
 
 t = time.time()
 import modules.gltext as gltext
@@ -178,7 +178,7 @@ class GimbalWindow:
         if SDL_GL_SetSwapInterval(-1):
             logg.error(SDL_GetError())
             if SDL_GL_SetSwapInterval(1):
-                logg.error(SDL_GetError())
+                logg.error("SDL_GL_SetSwapInterval: %s", SDL_GetError())
                 logg.error("vsync failed completely. will munch cpu for lunch.")
 
         self.keys = SDL_GetKeyboardState(None)
@@ -468,8 +468,8 @@ class GimbalWindow:
         glLineWidth(2.)
         glColor4f(0.7, 0.7, 0.7, 1.0)
 
-        self._floor_vertex_list.draw(GL.GL_LINES)
-        #self._floor_vertex_list.draw(GL.GL_TRIANGLES)
+        self._floor_vertex_list.draw(GL_LINES)
+        #self._floor_vertex_list.draw(GL_TRIANGLES)
         #self._floor_vertex_list.draw(pyglet.gl.GL_LINES)
 
         if 1:

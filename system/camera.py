@@ -1,8 +1,8 @@
 
 import math
 
-from modules.pyrexopengl import *
-from modules.pyrexopenglconstans import *
+import OpenGL
+from OpenGL.GL import *
 
 import coordinate_system
 import vector
